@@ -69,23 +69,34 @@
     </form>
 
     <section id="error-btns">
-      <button>Console Log</button>
-      <button>Console Error</button>
-      <button>Console Count</button>
-      <button>Console Warn</button>
-      <button>Console Assert</button>
-      <button>Console Clear</button>
-      <button>Console Dir</button>
-      <button>Console dirxml</button>
-      <button>Console Group Start</button>
-      <button>Console Group End</button>
-      <button>Console Table</button>
-      <button>Start Timer</button>
-      <button>End Timer</button>
-      <button>Console Trace</button>
-      <button>Trigger a Global Error</button>
+      <button onclick="log()">Console Log</button>
+      <button onclick="error()">Console Error</button>
+      <button onclick="count()">Console Count</button>
+      <button onclick="warn()">Console Warn</button>
+      <button onclick="assert()">Console Assert</button>
+      <button onclick="clearing()">Console Clear</button>
+      <button onclick="directory()">Console Dir</button>
+      <button onclick="dirxml()">Console dirxml</button>
+      <button onclick="start()">Console Group Start</button>
+      <button onclick="end()">Console Group End</button>
+      <button onclick="table()">Console Table</button>
+      <button onclick="start_timer()">Start Timer</button>
+      <button onclick="end_timer()">End Timer</button>
+      <button onclick="trace()">Console Trace</button>
+      <button onclick="global_error()">Trigger a Global Error</button>
     </section>
   </main>
+
+  
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    //step 5
+    window.TrackJS && TrackJS.install({ 
+      token: "a3ac2573d0fe4fa29d847cb2d5d6c19f",
+      application: "lab-9"
+    });
+  </script>
+
 
   <script>
     let form = document.querySelector('form');
@@ -100,8 +111,128 @@
 
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
 
+    var fav_lego = {
+      name: "jeep",
+      price: "40 dollars"
+    };
+
     // Start your code here
     // You may move this JS to another file if you wish
+
+    //step 2
+    function log() {
+      console.log("you pressed console.log");
+    }
+
+    function error() {
+      console.error("you pressed console.error");
+    }
+
+    function count() {
+      console.count();
+    }
+
+    function warn() {
+      console.warn("you pressed console.warn");
+    }
+
+    function assert() {
+      var number = 2;
+      console.assert(number == 3, "Number is not equivalent to 3.");
+    }
+
+    function clearing() {
+      console.clear();
+    }
+
+    function directory() {
+      console.dir(fav_lego);
+    }
+
+    function dirxml() {
+      console.dirxml(fav_lego);
+    }
+
+    function start() {
+      console.group("starting group");
+    }
+
+    function end() {
+      console.groupEnd();
+    }
+
+    function table() {
+      console.table(["hello", "hanging out now", "goodbye"]);
+    }
+
+    function start_timer() {
+      console.time();
+    }
+
+    function end_timer() {
+      console.timeEnd();
+    }
+
+    function trace() {
+      console.trace();
+    }
+
+    function global_error() {
+      throw new Error("this is a global error!");
+    }
+
+
+    // step 3
+    try {
+      console.log("there is no error here");
+    }
+    catch {
+      console.log("there is no error to catch!");
+    }
+
+    try {
+      let user = {
+        name: 'James'
+      };
+
+      if (!user.age) {
+        throw new Error();
+      }
+    }
+    catch(err) {
+      throw new Error("user does not have an age!");
+    }
+    
+
+
+    // step 4
+    class customError extends Error{
+      constructor() {
+        super();
+        this.message = "this is a custom error class";
+        this.name = "Custom Error";
+      }
+    }
+
+    try {
+      let user = {
+        name: 'James'
+      };
+
+      if (!user.age) {
+        throw new Error();
+      }
+    }
+    catch(err) {
+      throw new customError();
+    }
+
+
+
+
+
+
+
   </script>
 </body>
 
